@@ -1,0 +1,51 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// **************************************************************************
+// InjectableConfigGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint
+// coverage:ignore-file
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:get_it/get_it.dart' as _i1;
+import 'package:injectable/injectable.dart' as _i2;
+import 'package:stacked_services/stacked_services.dart' as _i4;
+
+import '../API/api_service.dart' as _i3;
+import '../services/needed_utils.dart' as _i5;
+import '../third_party/services.dart' as _i6;
+
+// initializes the registration of main-scope dependencies inside of GetIt
+_i1.GetIt $initGetIt(
+  _i1.GetIt getIt, {
+  String? environment,
+  _i2.EnvironmentFilter? environmentFilter,
+}) {
+  final gh = _i2.GetItHelper(
+    getIt,
+    environment,
+    environmentFilter,
+  );
+  final thirdPartyServicesModule = _$ThirdPartyServicesModule();
+  gh.lazySingleton<_i3.ApiService>(() => _i3.ApiService.create());
+  gh.lazySingleton<_i4.DialogService>(
+      () => thirdPartyServicesModule.dialogService);
+  gh.lazySingleton<_i4.NavigationService>(
+      () => thirdPartyServicesModule.navigationService);
+  gh.singleton<_i5.NeededVariables>(_i5.NeededVariables());
+  gh.lazySingleton<_i4.SnackbarService>(
+      () => thirdPartyServicesModule.snackBarService);
+  return getIt;
+}
+
+class _$ThirdPartyServicesModule extends _i6.ThirdPartyServicesModule {
+  @override
+  _i4.DialogService get dialogService => _i4.DialogService();
+
+  @override
+  _i4.NavigationService get navigationService => _i4.NavigationService();
+
+  @override
+  _i4.SnackbarService get snackBarService => _i4.SnackbarService();
+}
